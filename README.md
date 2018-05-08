@@ -12,10 +12,14 @@ Augusto Mafra
 1. Todo o trabalho esta implementado nos arquivos fonte \*.java. Para
    compilar, execute na linha de comando Unix:
 
+    ```
     $ make
+    ```
 
 2. Para executar o programa, deve ser passado a classe Banco ao interpretador
    Java pelo comando:
 
+    ```
     $ java Banco
+    ```
 
