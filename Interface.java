@@ -23,19 +23,50 @@ public class Interface {
         System.out.println("Augusto Mafra\n");
     }
 
-    private static void executarLinhaDeComando() {
+    private static Comando executarLinhaDeComando() {
         System.out.print("> ");
         String input = scan.nextLine();
-        // TODO Por enquanto a entrada so e' ecoada na saida
-        System.out.println(input);
+        Comando comando = reconhecerComando(input);
+        if (comando == Comando.AJUDA) {
+            mostrarListaDeComandos();
+        } else if (comando == Comando.SAIR) {
+            System.out.println("Encerrando sistema de gerenciamento de banco...");
+        } else if (comando == Comando.ERRO) {
+            System.out.println("ERRO: Comando desconhecido");
+        }
+        return comando;
+    }
+
+    // Recohnece uma string como sendo um comando listado no enum 'Comando'
+    // Se a string nao corresponder a nenhum item do enum, retorna o enum ERRO
+    private static Comando reconhecerComando(String cmd_string) {
+        if (cmd_string.equals("ajuda")) {
+            return Comando.AJUDA;
+        } else if (cmd_string.equals("sair")) {
+            return Comando.SAIR;
+        } else {
+            return Comando.ERRO;
+        }
+    }
+
+    private static void mostrarListaDeComandos() {
+        System.out.println("Lista de comandos:");
+        System.out.println("ajuda");
+        System.out.println("sair");
     }
 
     public static void main(String[] args) {
         iniciarLinhaDeComando();
-        while (true) {
-            executarLinhaDeComando();
+        Comando comando = Comando.ERRO;
+        while (comando != Comando.SAIR) {
+            comando = executarLinhaDeComando();
         }
     }
 
+    private static enum Comando {
+        AJUDA,
+        SAIR,
+        ERRO
+    }
     private static Scanner scan;
 }
