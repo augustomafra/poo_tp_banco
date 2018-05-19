@@ -16,10 +16,10 @@ Augusto Mafra
     $ make
     ```
 
-2. Para executar o programa, deve ser passado a classe Banco ao interpretador
+2. Para executar o programa, deve ser passado a classe Interface ao interpretador
    Java pelo comando:
 
     ```
-    $ java Banco
+    $ java Interface
     ```
 
