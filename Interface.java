@@ -9,6 +9,7 @@
 // Augusto Mafra
 
 import java.util.Scanner;
+import banco.Banco;
 
 public class Interface {
     private static void iniciarLinhaDeComando() {
@@ -56,6 +57,7 @@ public class Interface {
     }
 
     public static void main(String[] args) {
+        Banco pooBank = new Banco("pooBank");
         iniciarLinhaDeComando();
         Comando comando = Comando.ERRO;
         while (comando != Comando.SAIR) {

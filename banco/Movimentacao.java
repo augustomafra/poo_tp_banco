@@ -10,13 +10,11 @@
 
 package banco;
 
-import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
-public class Banco {
-    Banco(String nome) {
-        nomeBanco = nome;
-    }
-    String nomeBanco;
-    ArrayList clientes;
-    ArrayList contas;
+class Movimentacao {
+    private GregorianCalendar dataMov;
+    private String descricao;
+    private char debitoCredito;
+    private double valor;
 }
