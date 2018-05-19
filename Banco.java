@@ -8,8 +8,15 @@
 // Andre Lage
 // Augusto Mafra
 
+package banco;
+
+import java.util.ArrayList;
+
 public class Banco {
-    public static void main(String[] args) {
-        System.out.println("Inicializando banco");
+    Banco(String nome) {
+        nomeBanco = nome;
     }
+    String nomeBanco;
+    ArrayList clientes;
+    ArrayList contas;
 }

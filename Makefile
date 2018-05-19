@@ -19,7 +19,8 @@ BLOCK_WARNINGS = -Werror # Treat any compilation warning as error
 .java.class:
 	$(COMPILE) $(DEBUG) -d $(DESTINY_DIR) $(BLOCK_WARNINGS) $*.java
 
-SOURCE = Banco.java
+SOURCE = Banco.java \
+		 Interface.java
 
 all: classes
 
