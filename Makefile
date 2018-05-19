@@ -19,12 +19,23 @@ BLOCK_WARNINGS = -Werror # Treat any compilation warning as error
 .java.class:
 	$(COMPILE) $(DEBUG) -d $(DESTINY_DIR) $(BLOCK_WARNINGS) $*.java
 
-SOURCE = Banco.java \
-		 Interface.java
+CONTA_DEPENDENCIES = banco/Cliente.java \
+					 banco/Movimentacao.java
 
-all: classes
+CONTA = banco/Conta.java
 
-classes: $(SOURCE:.java=.class)
+BANCO = banco/Banco.java
+
+MAIN = Interface.java
+
+all: $(MAIN:.java=.class)
+
+$(MAIN:.java=.class): $(BANCO:.java=.class)
+
+$(BANCO:.java=.class): $(CONTA:.java=.class)
+
+$(CONTA:.java=.class): $(CONTA_DEPENDENCIES:.java=.class)
 
 clean:
+	$(RM) ./banco/*.class
 	$(RM) ./*.class
