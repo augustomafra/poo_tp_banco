@@ -17,4 +17,26 @@ class Movimentacao {
     private String descricao;
     private char debitoCredito;
     private double valor;
+
+    public 	Movimentacao(String descricao, char debitoCredito, double valor){
+    	this.descricao=descricao;
+    	this.debitoCredito=debitoCredito;
+    	this.valor=valor;
+    	//dataMov.
+    }
+
+    public String getDescricao(){
+    	return descricao;
+    }
+
+   public char getDebitoCredito(){
+   		return debitoCredito;
+
+   }
+
+   public double getValor(){
+   		return valor;
+   }
 }
+
+
