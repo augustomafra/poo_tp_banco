@@ -18,24 +18,23 @@ public class Interface {
         AJUDA,
         CADASTRAR_CLIENTE,
         CRIAR_CONTA,
+        EXCLUIR_CLIENTE,
         SAIR,
         ERRO
     }
 
-    private static String[] args;
-
     // Recohnece uma string como sendo um comando listado no enum 'Comando'
     // Se a string nao corresponder a nenhum item do enum, retorna o enum ERRO
     private static Comando reconhecerComando(String cmd_string) {
-        args = cmd_string.split(" ");
-        String cmd_name = args[0];
-        if (cmd_name.equals("ajuda")) {
+        if (cmd_string.equals("ajuda")) {
             return Comando.AJUDA;
-        } else if (cmd_name.equals("cadastrar")) {
+        } else if (cmd_string.equals("cadastrar")) {
             return Comando.CADASTRAR_CLIENTE;
-        } else if (cmd_name.equals("criar_conta")) {
+        } else if (cmd_string.equals("criar_conta")) {
             return Comando.CRIAR_CONTA;
-        } else if (cmd_name.equals("sair")) {
+        } else if (cmd_string.equals("excluir_cliente")) {
+            return Comando.EXCLUIR_CLIENTE;
+        } else if (cmd_string.equals("sair")) {
             return Comando.SAIR;
         } else {
             return Comando.ERRO;
@@ -49,9 +48,11 @@ public class Interface {
         if (comando == Comando.AJUDA) {
             mostrarListaDeComandos();
         } else if (comando == Comando.CADASTRAR_CLIENTE) {
-            if (args.length > 1) cadastrarCliente(args[1]);
+            cadastrarCliente();
         } else if (comando == Comando.CRIAR_CONTA) {
-            if (args.length > 1) criarConta(args[1]);
+            criarConta();
+        } else if (comando == Comando.EXCLUIR_CLIENTE) {
+            excluirCliente();
         } else if (comando == Comando.SAIR) {
             System.out.println("Encerrando sistema de gerenciamento de banco...");
         } else if (comando == Comando.ERRO) {
@@ -64,18 +65,24 @@ public class Interface {
     private static void mostrarListaDeComandos() {
         System.out.println("Lista de comandos:");
         System.out.println("ajuda");
-        System.out.println("cadastrar <cliente>");
-        System.out.println("criar_conta <cliente>");
+        System.out.println("cadastrar");
+        System.out.println("criar_conta");
+        System.out.println("excluir_cliente");
         System.out.println("sair");
     }
 
-    private static void cadastrarCliente(String nome) {
-        System.out.println("Cadastrando cliente " + nome);
+    private static void cadastrarCliente() {
+        System.out.println("Cadastrando cliente");
         // TODO cadastrar cliente no banco
     }
 
-    private static void criarConta(String nome) {
-        System.out.println("Criando conta para " + nome);
+    private static void criarConta() {
+        System.out.println("Criando conta");
+        // TODO cadastrar cliente no banco
+    }
+
+    private static void excluirCliente() {
+        System.out.println("Excluindo cliente");
         // TODO cadastrar cliente no banco
     }
 /************************* Criar Comandos aqui dentro *************************/
