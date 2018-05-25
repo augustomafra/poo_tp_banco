@@ -14,73 +14,45 @@ import banco.Banco;
 public class Interface {
 
 /************************* Criar Comandos aqui dentro *************************/
-    private static enum Comando {
-        AJUDA,
-        CADASTRAR_CLIENTE,
-        CRIAR_CONTA,
-        DEPOSITO,
-        EXCLUIR_CLIENTE,
-        EXCLUIR_CONTA,
-        SAIR,
-        ERRO
-    }
+    static String[] comandos = {"ajuda",
+                                "cadastrar",
+                                "criar_conta",
+                                "deposito",
+                                "excluir_cliente",
+                                "excluir_conta",
+                                "sair"};
 
-    // Recohnece uma string como sendo um comando listado no enum 'Comando'
-    // Se a string nao corresponder a nenhum item do enum, retorna o enum ERRO
-    private static Comando reconhecerComando(String cmd_string) {
-        if (cmd_string.equals("ajuda")) {
-            return Comando.AJUDA;
-        } else if (cmd_string.equals("cadastrar")) {
-            return Comando.CADASTRAR_CLIENTE;
-        } else if (cmd_string.equals("criar_conta")) {
-            return Comando.CRIAR_CONTA;
-        } else if (cmd_string.equals("deposito")) {
-            return Comando.DEPOSITO;
-        } else if (cmd_string.equals("excluir_cliente")) {
-            return Comando.EXCLUIR_CLIENTE;
-        } else if (cmd_string.equals("excluir_conta")) {
-            return Comando.EXCLUIR_CONTA;
-        } else if (cmd_string.equals("sair")) {
-            return Comando.SAIR;
-        } else {
-            return Comando.ERRO;
-        }
-    }
-
-    private static Comando executarLinhaDeComando() {
+    private static boolean executarLinhaDeComando() {
         System.out.print("> ");
         String input = scan.nextLine();
-        Comando comando = reconhecerComando(input);
-        if (comando == Comando.AJUDA) {
+        boolean status = true;
+        if (input.equals("ajuda")) {
             mostrarListaDeComandos();
-        } else if (comando == Comando.CADASTRAR_CLIENTE) {
+        } else if (input.equals("cadastrar")) {
             cadastrarCliente();
-        } else if (comando == Comando.CRIAR_CONTA) {
+        } else if (input.equals("criar_conta")) {
             criarConta();
-        } else if (comando == Comando.DEPOSITO) {
+        } else if (input.equals("deposito")) {
             deposito();
-        } else if (comando == Comando.EXCLUIR_CLIENTE) {
+        } else if (input.equals("excluir_cliente")) {
             excluirCliente();
-        } else if (comando == Comando.EXCLUIR_CONTA) {
+        } else if (input.equals("excluir_conta")) {
             excluirConta();
-        } else if (comando == Comando.SAIR) {
+        } else if (input.equals("sair")) {
             System.out.println("Encerrando sistema de gerenciamento de banco...");
-        } else if (comando == Comando.ERRO) {
+            status = false;
+        } else {
             System.out.println("ERRO: Comando desconhecido");
         }
-        return comando;
+        return status;
     }
 
     // Funcoes auxiliares para os comandos
     private static void mostrarListaDeComandos() {
         System.out.println("Lista de comandos:");
-        System.out.println("ajuda");
-        System.out.println("cadastrar");
-        System.out.println("criar_conta");
-        System.out.println("deposito");
-        System.out.println("excluir_cliente");
-        System.out.println("excluir_conta");
-        System.out.println("sair");
+        for (int i = 0; i < comandos.length; i++){
+            System.out.println(comandos[i]);
+        }
     }
 
     private static void cadastrarCliente() {
@@ -124,9 +96,9 @@ public class Interface {
     public static void main(String[] args) {
         Banco pooBank = new Banco("pooBank");
         iniciarLinhaDeComando();
-        Comando comando = Comando.ERRO;
-        while (comando != Comando.SAIR) {
-            comando = executarLinhaDeComando();
+        boolean status = true;
+        while (status) {
+            status = executarLinhaDeComando();
         }
     }
 
