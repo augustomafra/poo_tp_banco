@@ -19,6 +19,7 @@ public class Interface {
         CADASTRAR_CLIENTE,
         CRIAR_CONTA,
         EXCLUIR_CLIENTE,
+        EXCLUIR_CONTA,
         SAIR,
         ERRO
     }
@@ -34,6 +35,8 @@ public class Interface {
             return Comando.CRIAR_CONTA;
         } else if (cmd_string.equals("excluir_cliente")) {
             return Comando.EXCLUIR_CLIENTE;
+        } else if (cmd_string.equals("excluir_conta")) {
+            return Comando.EXCLUIR_CONTA;
         } else if (cmd_string.equals("sair")) {
             return Comando.SAIR;
         } else {
@@ -53,6 +56,8 @@ public class Interface {
             criarConta();
         } else if (comando == Comando.EXCLUIR_CLIENTE) {
             excluirCliente();
+        } else if (comando == Comando.EXCLUIR_CONTA) {
+            excluirConta();
         } else if (comando == Comando.SAIR) {
             System.out.println("Encerrando sistema de gerenciamento de banco...");
         } else if (comando == Comando.ERRO) {
@@ -68,6 +73,7 @@ public class Interface {
         System.out.println("cadastrar");
         System.out.println("criar_conta");
         System.out.println("excluir_cliente");
+        System.out.println("excluir_conta");
         System.out.println("sair");
     }
 
@@ -83,6 +89,11 @@ public class Interface {
 
     private static void excluirCliente() {
         System.out.println("Excluindo cliente");
+        // TODO cadastrar cliente no banco
+    }
+
+    private static void excluirConta() {
+        System.out.println("Excluindo conta");
         // TODO cadastrar cliente no banco
     }
 /************************* Criar Comandos aqui dentro *************************/
