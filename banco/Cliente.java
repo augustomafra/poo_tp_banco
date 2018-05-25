@@ -14,7 +14,7 @@ package banco;
     private String nomeCliente;
     private String cpf_cnpj;
     private String endereco;
-    private String fone; 
+    private String fone;
 
     public Cliente(String nomeCliente, String cpf_cnpj, String endereco, String fone){
     	this.nomeCliente=nomeCliente;
@@ -23,7 +23,7 @@ package banco;
     	this.fone=fone;
     }
 
-    public String getNomeCliente(){
+    public String getNome(){
     	return nomeCliente;
 
     }
@@ -43,7 +43,7 @@ package banco;
 
     }
 
-    public void setNomeCliente(String nome){
+    public void setNome(String nome){
     	nomeCliente=nome;
     }
 
