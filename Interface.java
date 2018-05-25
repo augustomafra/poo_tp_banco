@@ -23,6 +23,7 @@ public class Interface {
                                 "excluir_cliente",
                                 "excluir_conta",
                                 "extrato",
+                                "listar_clientes",
                                 "saldo",
                                 "saque",
                                 "transferencia",
@@ -50,6 +51,8 @@ public class Interface {
             excluirConta();
         } else if (input.equals("extrato")) {
             extrato();
+        } else if (input.equals("listar_clientes")) {
+            listarClientes();
         } else if (input.equals("saldo")) {
             saldo();
         } else if (input.equals("saque")) {
@@ -125,6 +128,11 @@ public class Interface {
 
     private static void extrato() {
         System.out.println("Obtendo extrato");
+        // TODO preencher funcao
+    }
+
+    private static void listarClientes() {
+        System.out.println("Lista de clientes:");
         // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
