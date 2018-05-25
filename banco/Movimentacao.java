@@ -22,7 +22,7 @@ class Movimentacao {
     	this.descricao=descricao;
     	this.debitoCredito=debitoCredito;
     	this.valor=valor;
-    	//dataMov.
+        this.dataMov = new GregorianCalendar(); //data atual do sistema
     }
 
     public String getDescricao(){
@@ -36,6 +36,10 @@ class Movimentacao {
 
    public double getValor(){
    		return valor;
+   }
+
+   public GregorianCalendar getDataMov(){
+        return (GregorianCalendar) dataMov.clone();
    }
 }
 

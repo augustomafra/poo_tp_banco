@@ -14,6 +14,12 @@ import banco.Banco;
 public class Interface {
 
 /************************* Criar Comandos aqui dentro *************************/
+    private static enum Comando {
+        AJUDA,
+        SAIR,
+        ERRO
+    }
+
     // Recohnece uma string como sendo um comando listado no enum 'Comando'
     // Se a string nao corresponder a nenhum item do enum, retorna o enum ERRO
     private static Comando reconhecerComando(String cmd_string) {
@@ -69,10 +75,5 @@ public class Interface {
         }
     }
 
-    private static enum Comando {
-        AJUDA,
-        SAIR,
-        ERRO
-    }
     private static Scanner scan;
 }
