@@ -21,6 +21,7 @@ public class Interface {
                                 "excluir_cliente",
                                 "excluir_conta",
                                 "saque",
+                                "transferencia",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -41,6 +42,8 @@ public class Interface {
             excluirConta();
         } else if (input.equals("saque")) {
             saque();
+        } else if (input.equals("transferencia")) {
+            transferencia();
         } else if (input.equals("sair")) {
             System.out.println("Encerrando sistema de gerenciamento de banco...");
             status = false;
@@ -85,6 +88,11 @@ public class Interface {
 
     private static void saque() {
         System.out.println("Efetuando saque");
+        // TODO preencher funcao
+    }
+
+    private static void transferencia() {
+        System.out.println("Efetuando transferencia");
         // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
