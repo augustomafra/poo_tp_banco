@@ -18,6 +18,7 @@ public class Interface {
         AJUDA,
         CADASTRAR_CLIENTE,
         CRIAR_CONTA,
+        DEPOSITO,
         EXCLUIR_CLIENTE,
         EXCLUIR_CONTA,
         SAIR,
@@ -33,6 +34,8 @@ public class Interface {
             return Comando.CADASTRAR_CLIENTE;
         } else if (cmd_string.equals("criar_conta")) {
             return Comando.CRIAR_CONTA;
+        } else if (cmd_string.equals("deposito")) {
+            return Comando.DEPOSITO;
         } else if (cmd_string.equals("excluir_cliente")) {
             return Comando.EXCLUIR_CLIENTE;
         } else if (cmd_string.equals("excluir_conta")) {
@@ -54,6 +57,8 @@ public class Interface {
             cadastrarCliente();
         } else if (comando == Comando.CRIAR_CONTA) {
             criarConta();
+        } else if (comando == Comando.DEPOSITO) {
+            deposito();
         } else if (comando == Comando.EXCLUIR_CLIENTE) {
             excluirCliente();
         } else if (comando == Comando.EXCLUIR_CONTA) {
@@ -72,6 +77,7 @@ public class Interface {
         System.out.println("ajuda");
         System.out.println("cadastrar");
         System.out.println("criar_conta");
+        System.out.println("deposito");
         System.out.println("excluir_cliente");
         System.out.println("excluir_conta");
         System.out.println("sair");
@@ -79,22 +85,27 @@ public class Interface {
 
     private static void cadastrarCliente() {
         System.out.println("Cadastrando cliente");
-        // TODO cadastrar cliente no banco
+        // TODO preencher funcao
     }
 
     private static void criarConta() {
         System.out.println("Criando conta");
-        // TODO cadastrar cliente no banco
+        // TODO preencher funcao
     }
 
     private static void excluirCliente() {
         System.out.println("Excluindo cliente");
-        // TODO cadastrar cliente no banco
+        // TODO preencher funcao
     }
 
     private static void excluirConta() {
         System.out.println("Excluindo conta");
-        // TODO cadastrar cliente no banco
+        // TODO preencher funcao
+    }
+
+    private static void deposito() {
+        System.out.println("Efetuando deposito");
+        // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
 
