@@ -18,6 +18,7 @@ public class Interface {
                                 "cadastrar",
                                 "criar_conta",
                                 "cobrar_tarifa",
+                                "cobrar_cpmf",
                                 "deposito",
                                 "excluir_cliente",
                                 "excluir_conta",
@@ -37,6 +38,8 @@ public class Interface {
             criarConta();
         } else if (input.equals("cobrar_tarifa")) {
             cobrarTarifa();
+        } else if (input.equals("cobrar_cpmf")) {
+            cobrarCPMF();
         } else if (input.equals("deposito")) {
             deposito();
         } else if (input.equals("excluir_cliente")) {
@@ -101,6 +104,11 @@ public class Interface {
 
     private static void cobrarTarifa() {
         System.out.println("Cobrando tarifa");
+        // TODO preencher funcao
+    }
+
+    private static void cobrarCPMF() {
+        System.out.println("Cobrando CPMF");
         // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
