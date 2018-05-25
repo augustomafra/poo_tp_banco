@@ -22,6 +22,7 @@ public class Interface {
                                 "deposito",
                                 "excluir_cliente",
                                 "excluir_conta",
+                                "saldo",
                                 "saque",
                                 "transferencia",
                                 "sair"};
@@ -46,6 +47,8 @@ public class Interface {
             excluirCliente();
         } else if (input.equals("excluir_conta")) {
             excluirConta();
+        } else if (input.equals("saldo")) {
+            saldo();
         } else if (input.equals("saque")) {
             saque();
         } else if (input.equals("transferencia")) {
@@ -109,6 +112,11 @@ public class Interface {
 
     private static void cobrarCPMF() {
         System.out.println("Cobrando CPMF");
+        // TODO preencher funcao
+    }
+
+    private static void saldo() {
+        System.out.println("Obtendo saldo");
         // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
