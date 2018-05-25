@@ -22,4 +22,40 @@ public class Banco {
     private String nomeBanco;
     private ArrayList<banco.Cliente> clientes;
     private ArrayList<banco.Conta> contas;
+
+    public void addCliente(banco.Cliente cliente){
+    	clientes.add(cliente);
+    }
+
+    public void criaConta(banco.Cliente cliente){
+		int flag = 0;
+		for (banco.Cliente c : clientes){
+			if( c.equals(cliente) ){
+			flag=1;
+			}
+		}
+		if(flag==0){
+			System.out.println("ERRO: Cliente não cadastrado no banco");
+			return;
+		}
+		banco.Conta conta = new banco.Conta(cliente); 
+		contas.add(conta);
+	}
+   /*
+	public void removeCliente(string cpf){
+		int flag = 0;
+		for(banco.Cliente c : clientes){
+			if (c.getCpf_cnpj().equals(cpf)){
+				flag=1;
+			}
+		}
+		if(flag==0){
+			System.out.println("ERRO: Cliente não cadastrado no banco");
+			return;
+		}
+
+		for(banco.Conta)
+	}
+	*/
 }
+
