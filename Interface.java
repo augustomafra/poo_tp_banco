@@ -17,6 +17,7 @@ public class Interface {
     static String[] comandos = {"ajuda",
                                 "cadastrar",
                                 "criar_conta",
+                                "cobrar_tarifa",
                                 "deposito",
                                 "excluir_cliente",
                                 "excluir_conta",
@@ -34,6 +35,8 @@ public class Interface {
             cadastrarCliente();
         } else if (input.equals("criar_conta")) {
             criarConta();
+        } else if (input.equals("cobrar_tarifa")) {
+            cobrarTarifa();
         } else if (input.equals("deposito")) {
             deposito();
         } else if (input.equals("excluir_cliente")) {
@@ -93,6 +96,11 @@ public class Interface {
 
     private static void transferencia() {
         System.out.println("Efetuando transferencia");
+        // TODO preencher funcao
+    }
+
+    private static void cobrarTarifa() {
+        System.out.println("Cobrando tarifa");
         // TODO preencher funcao
     }
 /************************* Criar Comandos aqui dentro *************************/
