@@ -42,6 +42,11 @@ public class Banco {
         return copia;
     }
 
+    public ArrayList<banco.Conta> getContas(){
+        ArrayList<banco.Conta> copia = new ArrayList<banco.Conta>(contas);
+        return copia;
+    }
+
     public banco.Conta criaConta(banco.Cliente cliente){
 		int flag = 0;
 		for (banco.Cliente c : clientes){

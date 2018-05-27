@@ -34,6 +34,16 @@ public class Conta {
         movimentacoes = new ArrayList<banco.Movimentacao>(outra.movimentacoes);
     }
 
+    // Para impressao com System.out.println na Interface
+    public String toString(){
+        String ret = new String();
+        ret += "\tNumero da Conta: " + numConta + "\n";
+        ret += "\tSaldo: " + saldo + "\n";
+        ret += "\tCPF/CNPJ do Cliente: " + cliente.getCpf_cnpj() + "\n";
+        ret += "\n";
+        return ret;
+    }
+
     public int getNumConta(){
         return numConta;
     }

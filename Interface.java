@@ -175,7 +175,10 @@ public class Interface {
 
     private static void listarContas() {
         System.out.println("Lista de contas:");
-        // TODO preencher funcao
+        ArrayList<banco.Conta> listaDeContas = banco.getContas();
+        for (banco.Conta conta : listaDeContas){
+            System.out.println(conta);
+        }
     }
 /************************* Criar Comandos aqui dentro *************************/
 
