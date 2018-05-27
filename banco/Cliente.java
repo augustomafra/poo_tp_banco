@@ -10,7 +10,7 @@
 
 package banco;
 
- class Cliente {
+public class Cliente {
     private String nomeCliente;
     private String cpf_cnpj;
     private String endereco;

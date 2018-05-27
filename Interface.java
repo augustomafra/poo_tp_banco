@@ -10,6 +10,7 @@
 
 import java.util.Scanner;
 import banco.Banco;
+import banco.Cliente;
 
 public class Interface {
 
@@ -80,8 +81,27 @@ public class Interface {
     }
 
     private static void cadastrarCliente() {
-        System.out.println("Cadastrando cliente");
-        // TODO preencher funcao
+        System.out.println("Insira informacoes para cadastro do cliente:");
+        System.out.print("\t>>> Nome: ");
+        String nome = scan.nextLine();
+        System.out.print("\t>>> CPF/CNPJ: ");
+        String cpf_cnpj = scan.nextLine();
+        System.out.print("\t>>> Endereco: ");
+        String endereco = scan.nextLine();
+        System.out.print("\t>>> Telefone: ");
+        String telefone = scan.nextLine();
+        System.out.print("\t>>> Confirmar cadastro de cliente? [s/n] ");
+        String confirmacao = scan.nextLine();
+        if (confirmacao.equals("s")) {
+            boolean status = banco.addCliente(new Cliente(nome, cpf_cnpj, endereco, telefone));
+            if (status) {
+                System.out.println("Cadastro do cliente concluido com sucesso");
+            } else {
+                System.out.println("Erro ao cadastrar cliente");
+            }
+        } else {
+            System.out.println("Cadastro do cliente foi cancelado pelo usuario");
+        }
     }
 
     private static void criarConta() {
@@ -147,6 +167,7 @@ public class Interface {
 
     private static void iniciarLinhaDeComando() {
         scan = new Scanner(System.in);
+        banco = new Banco("pooBank");
 
         System.out.println("Universidade Federal de Minas Gerais");
         System.out.println("Programacao Orientada a Objetos");
@@ -158,7 +179,6 @@ public class Interface {
     }
 
     public static void main(String[] args) {
-        Banco pooBank = new Banco("pooBank");
         iniciarLinhaDeComando();
         boolean status = true;
         while (status) {
@@ -166,5 +186,6 @@ public class Interface {
         }
     }
 
+    private static Banco banco;
     private static Scanner scan;
 }

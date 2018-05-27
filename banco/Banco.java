@@ -23,10 +23,13 @@ public class Banco {
     private ArrayList<banco.Cliente> clientes;
     private ArrayList<banco.Conta> contas;
 
-    public void addCliente(banco.Cliente cliente){
-    	clientes.add(cliente);
+    public boolean addCliente(banco.Cliente cliente){
+        return clientes.add(cliente); // true se adicao foi bem sucedida
     }
 
+    // FIXME: Toda operacao de ler/escrever no console deve ser feita na classe
+    // Interface. Funcoes do Banco podem retornar um boolean, que a Interface
+    // pode checar para decidir se a operacao deu erro ou nao.
     public void criaConta(banco.Cliente cliente){
 		int flag = 0;
 		for (banco.Cliente c : clientes){
@@ -38,7 +41,7 @@ public class Banco {
 			System.out.println("ERRO: Cliente não cadastrado no banco");
 			return;
 		}
-		banco.Conta conta = new banco.Conta(cliente); 
+		banco.Conta conta = new banco.Conta(cliente);
 		contas.add(conta);
 	}
    /*
