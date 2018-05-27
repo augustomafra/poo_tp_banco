@@ -98,7 +98,7 @@ public class Interface {
             if (status) {
                 System.out.println("Cadastro do cliente concluido com sucesso");
             } else {
-                System.out.println("Erro ao cadastrar cliente");
+                System.out.println("Erro ao cadastrar cliente. Verifique se ja existe cliente cadastrado com o CPF/CNPJ especificado");
             }
         } else {
             System.out.println("Cadastro do cliente foi cancelado pelo usuario");

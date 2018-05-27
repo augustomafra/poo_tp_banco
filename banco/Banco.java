@@ -24,6 +24,7 @@ public class Banco {
     private ArrayList<banco.Conta> contas;
 
     public boolean addCliente(banco.Cliente cliente){
+        if (getCliente(cliente.getCpf_cnpj()) != null) return false;
         return clientes.add(cliente); // true se adicao foi bem sucedida
     }
 
