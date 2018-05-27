@@ -8,6 +8,7 @@
 // Andre Lage
 // Augusto Mafra
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import banco.Banco;
 import banco.Cliente;
@@ -156,7 +157,10 @@ public class Interface {
 
     private static void listarClientes() {
         System.out.println("Lista de clientes:");
-        // TODO preencher funcao
+        ArrayList<banco.Cliente> listaDeClientes = banco.getClientes();
+        for (banco.Cliente cliente : listaDeClientes){
+            System.out.println(cliente);
+        }
     }
 
     private static void listarContas() {

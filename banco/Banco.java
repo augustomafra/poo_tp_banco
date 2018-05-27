@@ -27,6 +27,11 @@ public class Banco {
         return clientes.add(cliente); // true se adicao foi bem sucedida
     }
 
+    public ArrayList<banco.Cliente> getClientes(){
+        ArrayList<banco.Cliente> copia = new ArrayList<banco.Cliente>(clientes);
+        return copia;
+    }
+
     // FIXME: Toda operacao de ler/escrever no console deve ser feita na classe
     // Interface. Funcoes do Banco podem retornar um boolean, que a Interface
     // pode checar para decidir se a operacao deu erro ou nao.

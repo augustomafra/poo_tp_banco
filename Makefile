@@ -12,7 +12,7 @@
 COMPILE = javac
 DEBUG = -g
 DESTINY_DIR = .
-BLOCK_WARNINGS = -Werror # Treat any compilation warning as error
+BLOCK_WARNINGS = -Werror -Xlint# Treat any compilation warning as error
 
 .SUFFIXES: .java .class
 

@@ -23,6 +23,17 @@ public class Cliente {
     	this.fone=fone;
     }
 
+    // Para impressao com System.out.println na Interface
+    public String toString(){
+        String ret = new String();
+        ret += "\tNome: " + nomeCliente + "\n";
+        ret += "\tCPF/CNPJ: " + cpf_cnpj + "\n";
+        ret += "\tEndereco: " + endereco + "\n";
+        ret += "\tTelefone: " + fone + "\n";
+        ret += "\n";
+        return ret;
+    }
+
     public String getNome(){
     	return nomeCliente;
 
