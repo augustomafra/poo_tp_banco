@@ -106,8 +106,18 @@ public class Interface {
     }
 
     private static void criarConta() {
-        System.out.println("Criando conta");
-        // TODO preencher funcao
+        System.out.println("Insira informacoes para criacao da conta:");
+        System.out.print("\t>>> CPF/CNPJ: ");
+        String cpf_cnpj = scan.nextLine();
+        banco.Cliente cliente = banco.getCliente(cpf_cnpj);
+        if (cliente == null){
+            System.out.println("ERRO: Nenhum cliente cadastrado com CPF/CNPJ " + cpf_cnpj);
+            return;
+        }
+        banco.Conta conta = banco.criaConta(cliente);
+        System.out.println("Criacao da conta numero " + conta.getNumConta() +
+                           " para " + cliente.getNome() +
+                           " concluida com sucesso");
     }
 
     private static void excluirCliente() {

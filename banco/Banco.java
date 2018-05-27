@@ -27,15 +27,22 @@ public class Banco {
         return clientes.add(cliente); // true se adicao foi bem sucedida
     }
 
+    public banco.Cliente getCliente(String cpf_cnpj){
+        for (banco.Cliente c : clientes){
+            if (c.getCpf_cnpj().equals(cpf_cnpj)){
+                banco.Cliente copia = new banco.Cliente(c);
+                return copia;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<banco.Cliente> getClientes(){
         ArrayList<banco.Cliente> copia = new ArrayList<banco.Cliente>(clientes);
         return copia;
     }
 
-    // FIXME: Toda operacao de ler/escrever no console deve ser feita na classe
-    // Interface. Funcoes do Banco podem retornar um boolean, que a Interface
-    // pode checar para decidir se a operacao deu erro ou nao.
-    public void criaConta(banco.Cliente cliente){
+    public banco.Conta criaConta(banco.Cliente cliente){
 		int flag = 0;
 		for (banco.Cliente c : clientes){
 			if( c.equals(cliente) ){
@@ -43,11 +50,12 @@ public class Banco {
 			}
 		}
 		if(flag==0){
-			System.out.println("ERRO: Cliente não cadastrado no banco");
-			return;
+			return null;
 		}
 		banco.Conta conta = new banco.Conta(cliente);
 		contas.add(conta);
+        banco.Conta copia = new banco.Conta(conta);
+        return copia;
 	}
    /*
 	public void removeCliente(string cpf){

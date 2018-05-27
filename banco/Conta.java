@@ -13,7 +13,7 @@ package banco;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-class Conta {
+public class Conta {
     private int numConta;
     private double saldo;
     private Cliente cliente;
@@ -24,6 +24,14 @@ class Conta {
         numConta = proximoNumConta++;
         saldo = 0;
         this.cliente = cliente;
+        this.movimentacoes = new ArrayList<banco.Movimentacao>();
+    }
+
+    public Conta(Conta outra){
+        numConta = outra.numConta;
+        saldo = outra.saldo;
+        cliente = outra.cliente;
+        movimentacoes = new ArrayList<banco.Movimentacao>(outra.movimentacoes);
     }
 
     public int getNumConta(){

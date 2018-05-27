@@ -23,6 +23,20 @@ public class Cliente {
     	this.fone=fone;
     }
 
+    public Cliente(Cliente outro){
+    	this.nomeCliente=outro.nomeCliente;
+    	this.cpf_cnpj=outro.cpf_cnpj;
+    	this.endereco=outro.endereco;
+    	this.fone=outro.fone;
+    }
+
+    public boolean equals(Cliente outro){
+        return this.nomeCliente.equals(outro.nomeCliente) &&
+               this.cpf_cnpj.equals(outro.cpf_cnpj) &&
+               this.endereco.equals(outro.endereco) &&
+               this.fone.equals(outro.fone);
+    }
+
     // Para impressao com System.out.println na Interface
     public String toString(){
         String ret = new String();
