@@ -52,15 +52,15 @@ public class Conta {
         return saldo;
     }
 
-    public void creditar(double valor, String descricao){
+    public boolean creditar(double valor, String descricao){
         saldo += valor;
-        movimentacoes.add(new Movimentacao(descricao, 'C', valor));
+        return movimentacoes.add(new Movimentacao(descricao, 'C', valor));
     }
 
-    public void debitar(double valor, String descricao){
-        if (valor > saldo) return;
+    public boolean debitar(double valor, String descricao){
+        if (valor > saldo) return false;
         saldo -= valor;
-        movimentacoes.add(new Movimentacao(descricao, 'D', valor));
+        return movimentacoes.add(new Movimentacao(descricao, 'D', valor));
     }
 
     public ArrayList<banco.Movimentacao> getExtrato(GregorianCalendar dataInicial, GregorianCalendar dataFinal){

@@ -86,15 +86,13 @@ public class Banco {
     public boolean deposito(int numConta, double valor){
         banco.Conta conta = getConta(numConta);
         if (conta == null) return false;
-        conta.creditar(valor, "Deposito");
-        return true;
+        return conta.creditar(valor, "Deposito");
     }
 
     public boolean saque(int numConta, double valor){
         banco.Conta conta = getConta(numConta);
         if (conta == null) return false;
-        conta.debitar(valor, "Saque");
-        return true;
+        return conta.debitar(valor, "Saque");
     }
 }
 

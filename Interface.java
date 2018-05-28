@@ -163,7 +163,7 @@ public class Interface {
             if (status) {
                 System.out.println("Saque concluido com sucesso");
             } else {
-                System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
+                System.out.println("ERRO: Saldo da conta insuficiente para saque");
             }
         } else {
             System.out.println("Saque cancelado pelo usuario");
