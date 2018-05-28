@@ -58,15 +58,9 @@ public class Banco {
     }
 
     public banco.Conta criaConta(banco.Cliente cliente){
-		int flag = 0;
-		for (banco.Cliente c : clientes){
-			if( c.equals(cliente) ){
-			flag=1;
-			}
-		}
-		if(flag==0){
-			return null;
-		}
+        banco.Cliente c = getCliente(cliente.getCpf_cnpj());
+        if (c == null) return null;
+
 		banco.Conta conta = new banco.Conta(cliente);
 		contas.add(conta);
         banco.Conta copia = new banco.Conta(conta);
