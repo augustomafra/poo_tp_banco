@@ -43,7 +43,7 @@ public class Banco {
         return copia;
     }
 
-    public banco.Conta getConta(int numConta){
+    private banco.Conta getConta(int numConta){
         for (banco.Conta c : contas){
             if (c.getNumConta() == numConta){
                 return c;
