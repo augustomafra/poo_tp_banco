@@ -193,6 +193,7 @@ public class Interface {
         System.out.println("Sistema de Gerenciamento de Banco\n");
         System.out.println("Andre Lage");
         System.out.println("Augusto Mafra\n");
+        System.out.println("\nEntre o comando 'ajuda' para obter uma lista dos comandos disponiveis\n");
     }
 
     public static void main(String[] args) {
