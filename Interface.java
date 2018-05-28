@@ -133,9 +133,19 @@ public class Interface {
     private static void deposito() {
         System.out.println("Insira informacoes para o deposito:");
         System.out.print("\t>>> Conta para deposito: ");
-        int numConta = Integer.parseInt(scan.nextLine());
+        int numConta;
+        try {
+            numConta = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numConta = 0; // usuario digitou qualquer coisa que nao e' int
+        }
         System.out.print("\t>>> Valor: ");
-        double valor = Double.parseDouble(scan.nextLine());
+        double valor;
+        try {
+            valor = Double.parseDouble(scan.nextLine());
+        } catch(NumberFormatException e) {
+            valor = 0; // usuario digitou qualquer coisa que nao e' double
+        }
         System.out.print("\t>>> Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]: ");
         String confirmacao = scan.nextLine();
         if (confirmacao.equals("s")) {
@@ -153,9 +163,19 @@ public class Interface {
     private static void saque() {
         System.out.println("Insira informacoes para o saque:");
         System.out.print("\t>>> Conta para saque: ");
-        int numConta = Integer.parseInt(scan.nextLine());
+        int numConta;
+        try {
+            numConta = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numConta = 0; // usuario digitou qualquer coisa que nao e' int
+        }
         System.out.print("\t>>> Valor: ");
-        double valor = Double.parseDouble(scan.nextLine());
+        double valor;
+        try {
+            valor = Double.parseDouble(scan.nextLine());
+        } catch(NumberFormatException e) {
+            valor = 0; // usuario digitou qualquer coisa que nao e' double
+        }
         System.out.print("\t>>> Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]: ");
         String confirmacao = scan.nextLine();
         if (confirmacao.equals("s")) {
