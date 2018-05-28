@@ -46,8 +46,7 @@ public class Banco {
     public banco.Conta getConta(int numConta){
         for (banco.Conta c : contas){
             if (c.getNumConta() == numConta){
-                banco.Conta copia = new banco.Conta(c);
-                return copia;
+                return c;
             }
         }
         return null;
@@ -94,6 +93,13 @@ public class Banco {
         banco.Conta conta = getConta(numConta);
         if (conta == null) return false;
         conta.creditar(valor, "Deposito");
+        return true;
+    }
+
+    public boolean saque(int numConta, double valor){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return false;
+        conta.debitar(valor, "Saque");
         return true;
     }
 }

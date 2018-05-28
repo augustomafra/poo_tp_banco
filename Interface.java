@@ -151,8 +151,23 @@ public class Interface {
     }
 
     private static void saque() {
-        System.out.println("Efetuando saque");
-        // TODO preencher funcao
+        System.out.println("Insira informacoes para o saque:");
+        System.out.print("\t>>> Conta para saque: ");
+        int numConta = Integer.parseInt(scan.nextLine());
+        System.out.print("\t>>> Valor: ");
+        double valor = Double.parseDouble(scan.nextLine());
+        System.out.print("\t>>> Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]: ");
+        String confirmacao = scan.nextLine();
+        if (confirmacao.equals("s")) {
+            boolean status = banco.saque(numConta, valor);
+            if (status) {
+                System.out.println("Saque concluido com sucesso");
+            } else {
+                System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
+            }
+        } else {
+            System.out.println("Saque cancelado pelo usuario");
+        }
     }
 
     private static void transferencia() {
