@@ -91,14 +91,14 @@ public class Interface {
         String endereco = scan.nextLine();
         System.out.print("\t>>> Telefone: ");
         String telefone = scan.nextLine();
-        System.out.print("\t>>> Confirmar cadastro de cliente? [s/n] ");
+        System.out.print("\t>>> Confirmar cadastro de cliente? [s/n]: ");
         String confirmacao = scan.nextLine();
         if (confirmacao.equals("s")) {
             boolean status = banco.addCliente(new Cliente(nome, cpf_cnpj, endereco, telefone));
             if (status) {
                 System.out.println("Cadastro do cliente concluido com sucesso");
             } else {
-                System.out.println("Erro ao cadastrar cliente. Verifique se ja existe cliente cadastrado com o CPF/CNPJ especificado");
+                System.out.println("ERRO: Ja existe cliente cadastrado com o CPF/CNPJ especificado");
             }
         } else {
             System.out.println("Cadastro do cliente foi cancelado pelo usuario");
@@ -131,8 +131,23 @@ public class Interface {
     }
 
     private static void deposito() {
-        System.out.println("Efetuando deposito");
-        // TODO preencher funcao
+        System.out.println("Insira informacoes para o deposito:");
+        System.out.print("\t>>> Conta para deposito: ");
+        int numConta = Integer.parseInt(scan.nextLine());
+        System.out.print("\t>>> Valor: ");
+        double valor = Double.parseDouble(scan.nextLine());
+        System.out.print("\t>>> Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]: ");
+        String confirmacao = scan.nextLine();
+        if (confirmacao.equals("s")) {
+            boolean status = banco.deposito(numConta, valor);
+            if (status) {
+                System.out.println("Deposito concluido com sucesso");
+            } else {
+                System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
+            }
+        } else {
+            System.out.println("Deposito cancelado pelo usuario");
+        }
     }
 
     private static void saque() {

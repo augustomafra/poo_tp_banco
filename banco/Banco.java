@@ -43,6 +43,16 @@ public class Banco {
         return copia;
     }
 
+    public banco.Conta getConta(int numConta){
+        for (banco.Conta c : contas){
+            if (c.getNumConta() == numConta){
+                banco.Conta copia = new banco.Conta(c);
+                return copia;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<banco.Conta> getContas(){
         ArrayList<banco.Conta> copia = new ArrayList<banco.Conta>(contas);
         return copia;
@@ -79,5 +89,12 @@ public class Banco {
 		for(banco.Conta)
 	}
 	*/
+
+    public boolean deposito(int numConta, double valor){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return false;
+        conta.creditar(valor, "Deposito");
+        return true;
+    }
 }
 
