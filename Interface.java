@@ -8,6 +8,7 @@
 // Andre Lage
 // Augusto Mafra
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import banco.Banco;
@@ -64,6 +65,12 @@ public class Interface {
             saque();
         } else if (input.equals("transferencia")) {
             transferencia();
+        // TODO comandos salvar e restaurar nao devem existir
+        } else if (input.equals("salvar")) {
+            salvar();
+        } else if (input.equals("restaurar")) {
+            restaurar();
+        // TODO comandos salvar e restaurar nao devem existir
         } else if (input.equals("sair")) {
             System.out.println("Encerrando sistema de gerenciamento de banco...");
             status = false;
@@ -229,6 +236,16 @@ public class Interface {
         for (banco.Conta conta : listaDeContas){
             System.out.println(conta);
         }
+    }
+
+    private static void salvar() {
+        if (!banco.salvar(Paths.get("database.txt"))) {
+            System.out.println("ERRO: O arquivo nao foi salvo");
+        }
+    }
+
+    private static void restaurar() {
+        banco = new Banco(Paths.get("database.txt"));
     }
 /************************* Criar Comandos aqui dentro *************************/
 

@@ -10,18 +10,40 @@
 
 package banco;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Banco {
     public Banco(String nome) {
         nomeBanco = nome;
-        nomeBanco = new String();
         clientes = new ArrayList<banco.Cliente>();
         contas = new ArrayList<banco.Conta>();
     }
     private String nomeBanco;
     private ArrayList<banco.Cliente> clientes;
     private ArrayList<banco.Conta> contas;
+
+    public Banco(Path filePath)
+    {
+        System.out.println("Restaurando informacoes do banco " + nomeBanco + " do arquivo " + filePath);
+    }
+
+    public boolean salvar(Path filePath)
+    {
+        System.out.println("Salvando informacoes do banco " + nomeBanco + " no arquivo " + filePath);
+        List<String> data = Arrays.asList("Inicio do arquivo", "Fim do arquivo");
+        try {
+            Files.write(filePath, data, Charset.forName("UTF-8"));
+        } catch(IOException e) {
+            return false;
+        }
+        return true;
+    }
 
     public boolean addCliente(banco.Cliente cliente){
         if (getCliente(cliente.getCpf_cnpj()) != null) return false;
