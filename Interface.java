@@ -8,6 +8,7 @@
 // Andre Lage
 // Augusto Mafra
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -65,14 +66,8 @@ public class Interface {
             saque();
         } else if (input.equals("transferencia")) {
             transferencia();
-        // TODO comandos salvar e restaurar nao devem existir
-        } else if (input.equals("salvar")) {
-            salvar();
-        } else if (input.equals("restaurar")) {
-            restaurar();
-        // TODO comandos salvar e restaurar nao devem existir
         } else if (input.equals("sair")) {
-            System.out.println("Encerrando sistema de gerenciamento de banco...");
+            salvar();
             status = false;
         } else {
             System.out.println("ERRO: Comando desconhecido");
@@ -239,19 +234,26 @@ public class Interface {
     }
 
     private static void salvar() {
-        if (!banco.salvar(Paths.get("database.txt"))) {
-            System.out.println("ERRO: O arquivo nao foi salvo");
+        System.out.println("Salvando dados do sistema em " + databaseFile.toAbsolutePath());
+        if (!banco.salvar(databaseFile)) {
+            System.out.println("ERRO: Erro ao salvar dados em " + databaseFile.toAbsolutePath());
         }
     }
 
     private static void restaurar() {
-        banco = new Banco(Paths.get("database.txt"));
+        System.out.println("Restaurando dados do sistema de " + databaseFile.toAbsolutePath() + "\n");
+        if (!databaseFile.toFile().exists()) {
+            System.out.println("ERRO: Arquivo " + databaseFile.toAbsolutePath() + " nao encontrado");
+            return;
+        }
+        banco = new Banco(databaseFile);
     }
 /************************* Criar Comandos aqui dentro *************************/
 
     private static void iniciarLinhaDeComando() {
         scan = new Scanner(System.in);
         banco = new Banco("pooBank");
+        databaseFile = Paths.get("database.txt");
 
         System.out.println("Universidade Federal de Minas Gerais");
         System.out.println("Programacao Orientada a Objetos");
@@ -260,6 +262,9 @@ public class Interface {
         System.out.println("Sistema de Gerenciamento de Banco\n");
         System.out.println("Andre Lage");
         System.out.println("Augusto Mafra\n");
+
+        restaurar();
+
         System.out.println("\nEntre o comando 'ajuda' para obter uma lista dos comandos disponiveis\n");
     }
 
@@ -273,4 +278,5 @@ public class Interface {
 
     private static Banco banco;
     private static Scanner scan;
+    private static Path databaseFile;
 }
