@@ -10,6 +10,8 @@
 
 package banco;
 
+import java.util.List;
+
 public class Cliente {
     private String nomeCliente;
     private String cpf_cnpj;
@@ -28,6 +30,14 @@ public class Cliente {
     	this.cpf_cnpj=outro.cpf_cnpj;
     	this.endereco=outro.endereco;
     	this.fone=outro.fone;
+    }
+
+    // Preenche a lista data com os dados do cliente
+    public void formatarDados(List<String> data) {
+        data.add(nomeCliente);
+        data.add(cpf_cnpj);
+        data.add(endereco);
+        data.add(fone);
     }
 
     public boolean equals(Cliente outro){

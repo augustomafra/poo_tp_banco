@@ -10,6 +10,7 @@
 
 package banco;
 
+import java.util.List;
 import java.util.GregorianCalendar;
 
 class Movimentacao {
@@ -23,6 +24,16 @@ class Movimentacao {
     	this.debitoCredito=debitoCredito;
     	this.valor=valor;
         this.dataMov = new GregorianCalendar(); //data atual do sistema
+    }
+
+    // Preenche a lista data com os dados da movimentacao
+    public void formatarDados(List<String> data) {
+        data.add(String.valueOf(dataMov.get(GregorianCalendar.YEAR)));
+        data.add(String.valueOf(dataMov.get(GregorianCalendar.MONTH)));
+        data.add(String.valueOf(dataMov.get(GregorianCalendar.DAY_OF_MONTH)));
+        data.add(descricao);
+        data.add(String.valueOf(debitoCredito));
+        data.add(String.valueOf(valor));
     }
 
     public String getDescricao(){

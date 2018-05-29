@@ -11,6 +11,7 @@
 package banco;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.GregorianCalendar;
 
 public class Conta {
@@ -32,6 +33,17 @@ public class Conta {
         saldo = outra.saldo;
         cliente = outra.cliente;
         movimentacoes = new ArrayList<banco.Movimentacao>(outra.movimentacoes);
+    }
+
+    // Preenche a lista data com os dados da conta
+    public void formatarDados(List<String> data) {
+        data.add(String.valueOf(numConta));
+        data.add(String.valueOf(saldo));
+        data.add("poo_tp_movimentacoes_database_inicio");
+        for (banco.Movimentacao m : movimentacoes) {
+            m.formatarDados(data);
+        }
+        data.add("poo_tp_movimentacoes_database_fim");
     }
 
     // Para impressao com System.out.println na Interface

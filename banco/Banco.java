@@ -36,7 +36,20 @@ public class Banco {
     public boolean salvar(Path filePath)
     {
         System.out.println("Salvando informacoes do banco " + nomeBanco + " no arquivo " + filePath);
-        List<String> data = Arrays.asList("Inicio do arquivo", "Fim do arquivo");
+        List<String> data = new ArrayList<String>();
+        data.add("poo_tp_banco_database_inicio");
+        data.add(nomeBanco);
+        data.add("poo_tp_clientes_database_inicio");
+        for (banco.Cliente c : clientes) {
+            c.formatarDados(data);
+        }
+        data.add("poo_tp_clientes_database_fim");
+        data.add("poo_tp_contas_database_inicio");
+        for (banco.Conta c : contas) {
+            c.formatarDados(data);
+        }
+        data.add("poo_tp_contas_database_fim");
+        data.add("poo_tp_banco_database_fim");
         try {
             Files.write(filePath, data, Charset.forName("UTF-8"));
         } catch(IOException e) {
