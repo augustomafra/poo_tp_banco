@@ -28,6 +28,17 @@ public class Conta {
         this.movimentacoes = new ArrayList<banco.Movimentacao>();
     }
 
+    // Para restaurar uma conta a partir do arquivo
+    public Conta(int numConta,
+                 double saldo,
+                 ArrayList<banco.Movimentacao> movimentacoes,
+                 banco.Cliente cliente){
+        this.numConta = numConta;
+        this.saldo = saldo;
+        this.cliente = cliente;
+        this.movimentacoes = movimentacoes;
+    }
+
     public Conta(Conta outra){
         numConta = outra.numConta;
         saldo = outra.saldo;
@@ -39,6 +50,7 @@ public class Conta {
     public void formatarDados(List<String> data) {
         data.add(String.valueOf(numConta));
         data.add(String.valueOf(saldo));
+        data.add(cliente.getCpf_cnpj());
         data.add("poo_tp_movimentacoes_database_inicio");
         for (banco.Movimentacao m : movimentacoes) {
             m.formatarDados(data);

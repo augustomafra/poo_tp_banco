@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Banco {
     public Banco(String nome) {
@@ -30,12 +31,24 @@ public class Banco {
 
     public Banco(Path filePath)
     {
-        System.out.println("Restaurando informacoes do banco " + nomeBanco + " do arquivo " + filePath);
+        nomeBanco = new String();
+        clientes = new ArrayList<banco.Cliente>();
+        contas = new ArrayList<banco.Conta>();
+
+        List<String> data = new ArrayList<String>();
+        try {
+            data = Files.readAllLines(filePath, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            // Erro na leitura do arquivo
+            return;
+        }
+
+        ListIterator<String> i = data.listIterator();
+        restauraBanco(data, i);
     }
 
     public boolean salvar(Path filePath)
     {
-        System.out.println("Salvando informacoes do banco " + nomeBanco + " no arquivo " + filePath);
         List<String> data = new ArrayList<String>();
         data.add("poo_tp_banco_database_inicio");
         data.add(nomeBanco);
@@ -53,7 +66,7 @@ public class Banco {
         try {
             Files.write(filePath, data, Charset.forName("UTF-8"));
         } catch(IOException e) {
-            return false;
+            return false; // Erro na escrita do arquivo
         }
         return true;
     }
@@ -100,6 +113,83 @@ public class Banco {
 		contas.add(conta);
         banco.Conta copia = new banco.Conta(conta);
         return copia;
+	}
+
+    private void restauraBanco(List<String> data, ListIterator<String> i) {
+        String info = i.next();
+        if (info.equals("poo_tp_banco_database_inicio")) {
+
+            info = i.next();
+            while (!info.equals("poo_tp_banco_database_fim")) {
+                nomeBanco = info;
+                restauraClientes(data, i);
+                restauraContas(data, i);
+                info = i.next();
+            }
+        }
+    }
+
+    private void restauraClientes(List<String> data, ListIterator<String> i) {
+        String info = i.next();
+        if (info.equals("poo_tp_clientes_database_inicio")) {
+
+            info = i.next();
+            while (!info.equals("poo_tp_clientes_database_fim")) {
+                String nome = info;
+                String cpf_cnpj = i.next();
+                String endereco = i.next();
+                String telefone = i.next();
+                addCliente(new banco.Cliente(nome, cpf_cnpj, endereco, telefone));
+                info = i.next();
+            }
+        }
+    }
+
+    private void restauraContas(List<String> data, ListIterator<String> i) {
+        String info = i.next();
+        if (info.equals("poo_tp_contas_database_inicio")) {
+
+            info = i.next();
+            while (!info.equals("poo_tp_contas_database_fim")) {
+                int numConta = Integer.parseInt(info);
+                double saldo = Double.parseDouble(i.next());
+                String cpf_cnpj = i.next();
+                ArrayList<banco.Movimentacao> movimentacoes = restauraMovimentacoes(data, i);
+                restauraConta(numConta, saldo, movimentacoes, cpf_cnpj);
+                info = i.next();
+            }
+        }
+    }
+
+    private ArrayList<banco.Movimentacao> restauraMovimentacoes(List<String> data, ListIterator<String> i) {
+        ArrayList<banco.Movimentacao> movimentacoes = new ArrayList<banco.Movimentacao>();
+        String info = i.next();
+        if (info.equals("poo_tp_movimentacoes_database_inicio")) {
+
+            info = i.next();
+            while (!info.equals("poo_tp_movimentacoes_database_fim")) {
+                int ano = Integer.parseInt(info);
+                int mes = Integer.parseInt(i.next());
+                int dia = Integer.parseInt(i.next());
+                String descricao = i.next();
+                char debitoCredito = i.next().charAt(0);
+                double valor = Double.parseDouble(i.next());
+                movimentacoes.add(new banco.Movimentacao(ano, mes, dia, descricao, debitoCredito, valor));
+                info = i.next();
+            }
+        }
+        return movimentacoes;
+    }
+
+    private void restauraConta(int numConta,
+                              double saldo,
+                              ArrayList<banco.Movimentacao> movimentacoes,
+                              String cpf_cnpj){
+        banco.Cliente c = getCliente(cpf_cnpj);
+        if (c == null) return;
+
+		banco.Conta conta = new banco.Conta(numConta, saldo, movimentacoes, c);
+		contas.add(conta);
 	}
    /*
 	public void removeCliente(string cpf){

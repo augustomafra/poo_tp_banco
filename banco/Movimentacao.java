@@ -26,6 +26,19 @@ class Movimentacao {
         this.dataMov = new GregorianCalendar(); //data atual do sistema
     }
 
+    // Para restaurar uma movimentacao a partir do arquivo
+    public Movimentacao(int ano,
+                        int mes,
+                        int dia,
+                        String descricao,
+                        char debitoCredito,
+                        double valor) {
+        this.dataMov = new GregorianCalendar(ano, mes, dia);
+        this.descricao = descricao;
+        this.debitoCredito = debitoCredito;
+        this.valor = valor;
+    }
+
     // Preenche a lista data com os dados da movimentacao
     public void formatarDados(List<String> data) {
         data.add(String.valueOf(dataMov.get(GregorianCalendar.YEAR)));
