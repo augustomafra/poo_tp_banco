@@ -243,8 +243,8 @@ public class Interface {
     private static void restaurar() {
         System.out.println("Restaurando dados do sistema de " + databaseFile.toAbsolutePath() + "\n");
         if (!databaseFile.toFile().exists()) {
-            System.out.println("ERRO: Arquivo " + databaseFile.toAbsolutePath() + " nao encontrado");
-            return;
+            System.out.println("AVISO: Arquivo " + databaseFile.toAbsolutePath() + " nao encontrado");
+            System.out.println("Informacoes cadastradas anteriormente nao estarao disponiveis");
         }
         banco = new Banco(databaseFile);
     }
