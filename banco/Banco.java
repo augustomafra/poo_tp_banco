@@ -39,8 +39,7 @@ public class Banco {
         try {
             data = Files.readAllLines(filePath, Charset.forName("UTF-8"));
         } catch (IOException e) {
-            // Erro na leitura do arquivo
-            return;
+            return; // Erro na leitura do arquivo
         }
 
         ListIterator<String> i = data.listIterator();
@@ -52,22 +51,16 @@ public class Banco {
         List<String> data = new ArrayList<String>();
         data.add("poo_tp_banco_database_inicio");
         data.add(nomeBanco);
-        data.add("poo_tp_clientes_database_inicio");
-        for (banco.Cliente c : clientes) {
-            c.formatarDados(data);
-        }
-        data.add("poo_tp_clientes_database_fim");
-        data.add("poo_tp_contas_database_inicio");
-        for (banco.Conta c : contas) {
-            c.formatarDados(data);
-        }
-        data.add("poo_tp_contas_database_fim");
+        salvaClientes(data);
+        salvaContas(data);
         data.add("poo_tp_banco_database_fim");
+
         try {
             Files.write(filePath, data, Charset.forName("UTF-8"));
         } catch(IOException e) {
             return false; // Erro na escrita do arquivo
         }
+
         return true;
     }
 
@@ -145,6 +138,14 @@ public class Banco {
         }
     }
 
+    private void salvaClientes(List<String> data) {
+        data.add("poo_tp_clientes_database_inicio");
+        for (banco.Cliente c : clientes) {
+            c.formatarDados(data);
+        }
+        data.add("poo_tp_clientes_database_fim");
+    }
+
     private void restauraContas(List<String> data, ListIterator<String> i) {
         String info = i.next();
         if (info.equals("poo_tp_contas_database_inicio")) {
@@ -159,6 +160,14 @@ public class Banco {
                 info = i.next();
             }
         }
+    }
+
+    private void salvaContas(List<String> data) {
+        data.add("poo_tp_contas_database_inicio");
+        for (banco.Conta c : contas) {
+            c.formatarDados(data);
+        }
+        data.add("poo_tp_contas_database_fim");
     }
 
     private ArrayList<banco.Movimentacao> restauraMovimentacoes(List<String> data, ListIterator<String> i) {
