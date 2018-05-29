@@ -147,6 +147,7 @@ public class Banco {
     }
 
     private void restauraContas(List<String> data, ListIterator<String> i) {
+        int maxNumConta = 0;
         String info = i.next();
         if (info.equals("poo_tp_contas_database_inicio")) {
 
@@ -156,10 +157,12 @@ public class Banco {
                 double saldo = Double.parseDouble(i.next());
                 String cpf_cnpj = i.next();
                 ArrayList<banco.Movimentacao> movimentacoes = restauraMovimentacoes(data, i);
+                maxNumConta = java.lang.Math.max(numConta, maxNumConta);
                 restauraConta(numConta, saldo, movimentacoes, cpf_cnpj);
                 info = i.next();
             }
         }
+        banco.Conta.restaurarContadorDeContas(maxNumConta);
     }
 
     private void salvaContas(List<String> data) {

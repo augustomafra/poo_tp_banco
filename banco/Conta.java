@@ -39,6 +39,11 @@ public class Conta {
         this.movimentacoes = movimentacoes;
     }
 
+    // Para restaurar o contador de contas a partir do arquivo
+    static public void restaurarContadorDeContas(int n) {
+        proximoNumConta = n + 1;
+    }
+
     public Conta(Conta outra){
         numConta = outra.numConta;
         saldo = outra.saldo;
