@@ -73,6 +73,10 @@ public class Conta {
         return ret;
     }
 
+    public Cliente getCliente(){
+        return cliente;
+    } 
+
     public int getNumConta(){
         return numConta;
     }

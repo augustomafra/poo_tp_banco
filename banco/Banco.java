@@ -203,22 +203,47 @@ public class Banco {
 		banco.Conta conta = new banco.Conta(numConta, saldo, movimentacoes, c);
 		contas.add(conta);
 	}
-   /*
-	public void removeCliente(string cpf){
+   
+	public void removeCliente(String cpf){
 		int flag = 0;
+        int contador=0;
+        int idCliente=0;
 		for(banco.Cliente c : clientes){
 			if (c.getCpf_cnpj().equals(cpf)){
 				flag=1;
+                idCliente=contador;
 			}
+        contador=contador+1;
 		}
 		if(flag==0){
 			System.out.println("ERRO: Cliente não cadastrado no banco");
 			return;
-		}
-
-		for(banco.Conta)
+		} 
+        flag=0;
+		for(banco.Conta co : contas ){
+            if(co.getCliente().getCpf_cnpj().equals(cpf)){
+            System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");
+            return;
+            }
+        
+        }
+        clientes.remove(idCliente);
+        System.out.println("Cliente deletado com sucesso");
 	}
-	*/
+	
+    public void removeConta(int numConta){
+        int contador=0;
+        for(banco.Conta c : contas){
+            System.out.println("yo");
+            if(c.getNumConta() == numConta){
+                contas.remove(contador);
+                System.out.println("Conta removida com sucesso");
+                return;
+            }
+        contador=contador+1;
+        }   
+        System.out.println("ERRO: ID de conta não corresponte a um valor cadastrado");
+    }
 
     public boolean deposito(int numConta, double valor){
         banco.Conta conta = getConta(numConta);

@@ -123,13 +123,22 @@ public class Interface {
     }
 
     private static void excluirCliente() {
-        System.out.println("Excluindo cliente");
+        System.out.println("Insira informacoes do cliente a ser excluido:");
+        System.out.print("\t>>> CPF/CNPJ: ");
+        String cpf_cnpj = scan.nextLine();
+        banco.removeCliente(cpf_cnpj);
         // TODO preencher funcao
     }
 
     private static void excluirConta() {
-        System.out.println("Excluindo conta");
-        // TODO preencher funcao
+        System.out.println("Insira o id da conta a ser deletada:");
+        int numConta;
+        try {
+            numConta = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numConta = 0; // usuario digitou qualquer coisa que nao e' int
+        }
+        banco.removeConta(numConta);
     }
 
     private static void deposito() {
@@ -193,7 +202,51 @@ public class Interface {
     }
 
     private static void transferencia() {
-        System.out.println("Efetuando transferencia");
+                System.out.println("Insira informacoes para a transferencia:");
+        System.out.print("\t>>> Conta origem: ");
+        int numContaOrigem;
+        try {
+            numContaOrigem = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numContaOrigem = 0; // usuario digitou qualquer coisa que nao e' int
+        }
+
+                System.out.print("\t>>> Conta destino: ");
+        int numContaDestino;
+        try {
+            numContaDestino = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numContaDestino = 0; // usuario digitou qualquer coisa que nao e' int
+        }
+        
+ 		System.out.print("\t>>> Valor: ");
+        double valor;
+        try {
+            valor = Double.parseDouble(scan.nextLine());
+        } catch(NumberFormatException e) {
+            valor = 0; // usuario digitou qualquer coisa que nao e' double
+        }
+         System.out.print("\t>>> Confirmar transferencia de R$" + valor + " da conta " + numContaOrigem + 
+         	" para a conta " + numContaDestino +" ? [s/n]: ");
+
+         String confirmacao = scan.nextLine();
+         if (confirmacao.equals("s")) {
+            boolean statusOrigem = banco.saque(numContaOrigem, valor);
+            if (statusOrigem) {
+	            boolean statusDestino = banco.deposito(numContaDestino, valor);
+	            if (statusDestino) {
+	                System.out.println("transferencia realizada com sucesso");
+	            } else {
+	                System.out.println("ERRO: Nenhuma conta com numero " + numContaDestino + " encontrada");
+	                banco.deposito(numContaOrigem, valor); //deposita o valor novamente em caso de erro
+	            }			    
+            } else {
+                System.out.println("ERRO: Saldo da conta insuficiente para saque");
+            }
+        } else {
+            System.out.println("Saque cancelado pelo usuario");
+        }
+
         // TODO preencher funcao
     }
 
