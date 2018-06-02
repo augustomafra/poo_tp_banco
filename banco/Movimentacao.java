@@ -53,7 +53,7 @@ public class Movimentacao {
     public String toString() {
         String ret = new String();
         ret += "\t" + dataMov.get(GregorianCalendar.DAY_OF_MONTH);
-        ret += "/" + dataMov.get(GregorianCalendar.MONTH);
+        ret += "/" + (dataMov.get(GregorianCalendar.MONTH) + 1);
         ret += "/" + dataMov.get(GregorianCalendar.YEAR);
         ret += "\t" + descricao;
         ret += "\t" + debitoCredito;

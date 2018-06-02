@@ -277,6 +277,22 @@ public class Banco {
             }
     }
 
+    public void cpmf(){
+        GregorianCalendar semanaPassada = new GregorianCalendar();
+        semanaPassada.roll(GregorianCalendar.MONTH, -1); // HACK DO CAPETA NAO PERGUNTE PQ OU O CAPETA VAI PUXAR SEU PE A NOITE
+        semanaPassada.roll(GregorianCalendar.DAY_OF_MONTH, -7);
+        for(banco.Conta co : contas ){
+            ArrayList<banco.Movimentacao> movimentacoes = co.getExtrato(semanaPassada);
+            double debitoTotal = 0;
+            for (banco.Movimentacao m : movimentacoes){
+                if (m.getDebitoCredito() == 'D'){
+                    debitoTotal += m.getValor();
+                }
+            }
+            co.debitar(0.0038 * debitoTotal, "Cobrança de CPMF");
+        }
+    }
+
     public double saldo(int numConta){
         for(banco.Conta c : contas){
             if(c.getNumConta() == numConta){

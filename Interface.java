@@ -274,7 +274,7 @@ public class Interface {
 
     private static void cobrarCPMF() {
         System.out.println("Cobrando CPMF");
-        // TODO preencher funcao
+        banco.cpmf();
     }
 
     private static void saldo() {
@@ -376,7 +376,7 @@ public class Interface {
         int dia = 0, mes = 0, ano = 0;
         try {
             dia = Integer.parseInt(calendarInfo[0]);
-            mes = Integer.parseInt(calendarInfo[1]);
+            mes = Integer.parseInt(calendarInfo[1]) - 1; // mes e' indexado a partir do 0
             ano = Integer.parseInt(calendarInfo[2]);
         } catch(NumberFormatException e) {
             System.out.println("\tERRO: Insira um " + descricao + " valido");
@@ -387,7 +387,9 @@ public class Interface {
         }
         input = new GregorianCalendar(ano, mes, dia);
         if (dia > input.getActualMaximum(GregorianCalendar.DAY_OF_MONTH) ||
-            mes > input.getActualMaximum(GregorianCalendar.MONTH)) {
+            dia < 1 ||
+            mes > input.getActualMaximum(GregorianCalendar.MONTH) ||
+            mes < 0) {
             System.out.println("\tERRO: Insira um " + descricao + " valido");
             input = promptCalendar(descricao);
         }
