@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.GregorianCalendar;
 
 public class Banco {
     public Banco(String nome) {
@@ -203,7 +204,7 @@ public class Banco {
 		banco.Conta conta = new banco.Conta(numConta, saldo, movimentacoes, c);
 		contas.add(conta);
 	}
-   
+
 	public void removeCliente(String cpf){
 		int flag = 0;
         int contador=0;
@@ -218,19 +219,19 @@ public class Banco {
 		if(flag==0){
 			System.out.println("ERRO: Cliente não cadastrado no banco");
 			return;
-		} 
+		}
         flag=0;
 		for(banco.Conta co : contas ){
             if(co.getCliente().getCpf_cnpj().equals(cpf)){
             System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");
             return;
             }
-        
+
         }
         clientes.remove(idCliente);
         System.out.println("Cliente deletado com sucesso");
 	}
-	
+
     public void removeConta(int numConta){
         int contador=0;
         for(banco.Conta c : contas){
@@ -241,7 +242,7 @@ public class Banco {
                 return;
             }
         contador=contador+1;
-        }   
+        }
         System.out.println("ERRO: ID de conta não corresponte a um valor cadastrado");
     }
 
@@ -255,6 +256,24 @@ public class Banco {
         banco.Conta conta = getConta(numConta);
         if (conta == null) return false;
         return conta.debitar(valor, "Saque");
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato();
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta, GregorianCalendar dataInicial){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato(dataInicial);
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta, GregorianCalendar dataInicial, GregorianCalendar dataFinal){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato(dataInicial, dataFinal);
     }
 }
 
