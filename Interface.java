@@ -86,16 +86,11 @@ public class Interface {
 
     private static void cadastrarCliente() {
         System.out.println("Insira informacoes para cadastro do cliente:");
-        System.out.print("\t>>> Nome: ");
-        String nome = scan.nextLine();
-        System.out.print("\t>>> CPF/CNPJ: ");
-        String cpf_cnpj = scan.nextLine();
-        System.out.print("\t>>> Endereco: ");
-        String endereco = scan.nextLine();
-        System.out.print("\t>>> Telefone: ");
-        String telefone = scan.nextLine();
-        System.out.print("\t>>> Confirmar cadastro de cliente? [s/n]: ");
-        String confirmacao = scan.nextLine();
+        String nome = promptString("Nome");
+        String cpf_cnpj = promptString("CPF/CNPJ");
+        String endereco = promptString("Endereco");
+        String telefone = promptString("Telefone");
+        String confirmacao = promptString("Confirmar cadastro do cliente? [s/n]");
         if (confirmacao.equals("s")) {
             boolean status = banco.addCliente(new Cliente(nome, cpf_cnpj, endereco, telefone));
             if (status) {
@@ -110,8 +105,7 @@ public class Interface {
 
     private static void criarConta() {
         System.out.println("Insira informacoes para criacao da conta:");
-        System.out.print("\t>>> CPF/CNPJ: ");
-        String cpf_cnpj = scan.nextLine();
+        String cpf_cnpj = promptString("CPF/CNPJ");
         banco.Cliente cliente = banco.getCliente(cpf_cnpj);
         if (cliente == null){
             System.out.println("ERRO: Nenhum cliente cadastrado com CPF/CNPJ " + cpf_cnpj);
@@ -125,29 +119,20 @@ public class Interface {
 
     private static void excluirCliente() {
         System.out.println("Insira informacoes do cliente a ser excluido:");
-        System.out.print("\t>>> CPF/CNPJ: ");
-        String cpf_cnpj = scan.nextLine();
+        String cpf_cnpj = promptString("CPF/CNPJ");
         int retorno =banco.removeCliente(cpf_cnpj);
         if(retorno==0){
             System.out.println("Cliente excluido com sucesso");
         } else if(retorno==-1){
             System.out.println("ERRO: Cliente não cadastrado no banco");
         }else if(retorno==-2){
-            System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");   
+            System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");
         }
-
-        // TODO preencher funcao
     }
 
     private static void excluirConta() {
-        System.out.println("Insira o id da conta a ser deletada:");
-        int numConta;
-        try {
-            numConta = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numConta = 0; // usuario digitou qualquer coisa que nao e' int
-        }
-        boolean retorno = banco.removeConta(numConta); 
+        int numConta = promptInt("Numero da conta");
+        boolean retorno = banco.removeConta(numConta);
         if(retorno){
             System.out.println("Conta removida com sucesso");
         }else{
@@ -157,16 +142,9 @@ public class Interface {
 
     private static void deposito() {
         System.out.println("Insira informacoes para o deposito:");
-        System.out.print("\t>>> Conta para deposito: ");
-        int numConta;
-        try {
-            numConta = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numConta = 0; // usuario digitou qualquer coisa que nao e' int
-        }
+        int numConta = promptInt("Numero da conta");
         double valor = promptDouble("Valor");
-        System.out.print("\t>>> Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]: ");
-        String confirmacao = scan.nextLine();
+        String confirmacao = promptString("Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]");
         if (confirmacao.equals("s")) {
             boolean status = banco.deposito(numConta, valor);
             if (status) {
@@ -181,16 +159,9 @@ public class Interface {
 
     private static void saque() {
         System.out.println("Insira informacoes para o saque:");
-        System.out.print("\t>>> Conta para saque: ");
-        int numConta;
-        try {
-            numConta = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numConta = 0; // usuario digitou qualquer coisa que nao e' int
-        }
+        int numConta = promptInt("Numero da conta");
         double valor = promptDouble("Valor");
-        System.out.print("\t>>> Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]: ");
-        String confirmacao = scan.nextLine();
+        String confirmacao = promptString("Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]");
         if (confirmacao.equals("s")) {
             boolean status = banco.saque(numConta, valor);
             if (status) {
@@ -204,74 +175,48 @@ public class Interface {
     }
 
     private static void transferencia() {
-                System.out.println("Insira informacoes para a transferencia:");
-        System.out.print("\t>>> Conta origem: ");
-        int numContaOrigem;
-        try {
-            numContaOrigem = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numContaOrigem = 0; // usuario digitou qualquer coisa que nao e' int
-        }
-
-                System.out.print("\t>>> Conta destino: ");
-        int numContaDestino;
-        try {
-            numContaDestino = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numContaDestino = 0; // usuario digitou qualquer coisa que nao e' int
-        }
-
+        System.out.println("Insira informacoes para a transferencia:");
+        int numContaOrigem = promptInt("Numero da conta de origem");
+        int numContaDestino = promptInt("Numero da conta de destino");
         double valor = promptDouble("Valor");
-         System.out.print("\t>>> Confirmar transferencia de R$" + valor + " da conta " + numContaOrigem +
-         	" para a conta " + numContaDestino +" ? [s/n]: ");
-
-         String confirmacao = scan.nextLine();
-         if (confirmacao.equals("s")) {
-            int status = banco.transferencia(numContaOrigem, numContaDestino , valor);
-            if (status==-1) {
-                System.out.println("Numero de conta origem é invalido");    
-            } else if(status==-2){
-                System.out.println("Numero de conta destino é invalido");    
-            } else if(status==-3){
-                System.out.println("Saldo insuficiente");
-            } else {
-                System.out.println("Transferencia realizada com sucesso");
-            }
+        String confirmacao = promptString("Confirmar transferencia de R$" + valor +
+                                          " da conta " + numContaOrigem +
+         	                              " para a conta " + numContaDestino + " ? [s/n]");
+        if (confirmacao.equals("s")) {
+           int status = banco.transferencia(numContaOrigem, numContaDestino , valor);
+           if (status==-1) {
+               System.out.println("Numero de conta origem é invalido");
+           } else if(status==-2){
+               System.out.println("Numero de conta destino é invalido");
+           } else if(status==-3){
+               System.out.println("Saldo insuficiente");
+           } else {
+               System.out.println("Transferencia realizada com sucesso");
+           }
         } else {
             System.out.println("Transferencia cancelada pelo usuario");
         }
-
-        // TODO preencher funcao
     }
 
     private static void cobrarTarifa() {
         banco.tarifa();
         System.out.println("Tarifa cobrada com sucesso");
-
-
-        // TODO preencher funcao
     }
 
     private static void cobrarCPMF() {
-        System.out.println("Cobrando CPMF");
         banco.cpmf();
+        System.out.println("CPMF cobrada com sucesso");
     }
 
     private static void saldo() {
         System.out.println("Insira o número da conta cujo saldo se deseja consutar:");
-        System.out.print("\t>>> Conta para consulta: ");
-        int numConta;
-        try {
-            numConta = Integer.parseInt(scan.nextLine());
-        } catch(NumberFormatException e) {
-            numConta = 0; // usuario digitou qualquer coisa que nao e' int
-        }
+        int numConta = promptInt("Numero da conta");
         double saldo = banco.saldo(numConta);
         if (saldo == -1){
             System.out.println("ERRO: Nenhuma conta com o número " + numConta);
+            return;
         }
-            System.out.println("O saldo da conta " + numConta  + " é " + saldo);
-        // TODO preencher funcao
+        System.out.println("O saldo da conta " + numConta  + " é " + saldo);
     }
 
     private static void extrato() {
@@ -327,8 +272,9 @@ public class Interface {
     }
 /************************* Criar Comandos aqui dentro *************************/
 
-    private static String promptString() {
-        return new String();
+    private static String promptString(String descricao) {
+        System.out.print("\t>>> " + descricao + ": ");
+        return scan.nextLine();
     }
 
     private static int promptInt(String descricao) {
@@ -349,6 +295,7 @@ public class Interface {
         try {
             input = Double.parseDouble(scan.nextLine());
         } catch(NumberFormatException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
             input = promptDouble(descricao);
         }
         if (input < 0) {
