@@ -270,6 +270,7 @@ public class Banco {
         banco.Conta conta = getConta(numConta);
         if (conta == null) return null;
         return conta.getExtrato(dataInicial, dataFinal);
+    }
 
     public void tarifa(){
         for(banco.Conta co : contas ){
