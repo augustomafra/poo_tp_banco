@@ -126,7 +126,15 @@ public class Interface {
         System.out.println("Insira informacoes do cliente a ser excluido:");
         System.out.print("\t>>> CPF/CNPJ: ");
         String cpf_cnpj = scan.nextLine();
-        banco.removeCliente(cpf_cnpj);
+        int retorno =banco.removeCliente(cpf_cnpj);
+        if(retorno==0){
+            System.out.println("Cliente excluido com sucesso");
+        } else if(retorno==-1){
+            System.out.println("ERRO: Cliente não cadastrado no banco");
+        }else if(retorno==-2){
+            System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");   
+        }
+
         // TODO preencher funcao
     }
 
@@ -138,7 +146,12 @@ public class Interface {
         } catch(NumberFormatException e) {
             numConta = 0; // usuario digitou qualquer coisa que nao e' int
         }
-        banco.removeConta(numConta);
+        boolean retorno = banco.removeConta(numConta); 
+        if(retorno){
+            System.out.println("Conta removida com sucesso");
+        }else{
+             System.out.println("ERRO: ID de conta não corresponte a um valor cadastrado");
+        }
     }
 
     private static void deposito() {
@@ -251,7 +264,8 @@ public class Interface {
     }
 
     private static void cobrarTarifa() {
-        System.out.println("Cobrando tarifa");
+        banco.tarifa();
+        System.out.println("Tarifa cobrada com sucesso");
         // TODO preencher funcao
     }
 
