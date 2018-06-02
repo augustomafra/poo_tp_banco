@@ -49,6 +49,19 @@ public class Movimentacao {
         data.add(String.valueOf(valor));
     }
 
+    // Para impressao com System.out.println na Interface
+    public String toString() {
+        String ret = new String();
+        ret += "\t" + dataMov.get(GregorianCalendar.DAY_OF_MONTH);
+        ret += "/" + dataMov.get(GregorianCalendar.MONTH);
+        ret += "/" + dataMov.get(GregorianCalendar.YEAR);
+        ret += "\t" + descricao;
+        ret += "\t" + debitoCredito;
+        ret += "\t" + valor;
+        ret += "\n";
+        return ret;
+    }
+
     public String getDescricao(){
     	return descricao;
     }
