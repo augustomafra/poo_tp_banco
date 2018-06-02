@@ -370,7 +370,7 @@ public class Interface {
         System.out.print("\t>>> " + descricao + " (dd/mm/aaaa ou default): ");
         String inputString = scan.nextLine();
         if (inputString.equals("default")) return null;
-        String[] calendarInfo = scan.nextLine().split("/");
+        String[] calendarInfo = inputString.split("/");
         int dia = 0, mes = 0, ano = 0;
         try {
             dia = Integer.parseInt(calendarInfo[0]);
