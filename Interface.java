@@ -266,6 +266,8 @@ public class Interface {
     private static void cobrarTarifa() {
         banco.tarifa();
         System.out.println("Tarifa cobrada com sucesso");
+
+
         // TODO preencher funcao
     }
 
@@ -275,7 +277,19 @@ public class Interface {
     }
 
     private static void saldo() {
-        System.out.println("Obtendo saldo");
+        System.out.println("Insira o número da conta cujo saldo se deseja consutar:");
+        System.out.print("\t>>> Conta para consulta: ");
+        int numConta;
+        try {
+            numConta = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            numConta = 0; // usuario digitou qualquer coisa que nao e' int
+        }
+        double saldo = banco.saldo(numConta);
+        if (saldo == -1){
+            System.out.println("ERRO: Nenhuma conta com o número " + numConta);
+        }
+            System.out.println("O saldo da conta " + numConta  + " é " + saldo);
         // TODO preencher funcao
     }
 

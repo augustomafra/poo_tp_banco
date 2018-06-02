@@ -232,7 +232,6 @@ public class Banco {
     public boolean removeConta(int numConta){
         int contador=0;
         for(banco.Conta c : contas){
-            System.out.println("yo");
             if(c.getNumConta() == numConta){
                 contas.remove(contador);
                 return true;
@@ -258,6 +257,16 @@ public class Banco {
         for(banco.Conta co : contas ){
             co.debitar(15,"Cobrança de tarifa");
             }
+    }
+
+    public double saldo(int numConta){
+        for(banco.Conta c : contas){
+            if(c.getNumConta() == numConta){
+                double saldo = c.getSaldo();
+                return saldo;
+            }
+        }
+        return -1;   
     }
 }
 
