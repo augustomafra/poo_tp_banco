@@ -45,6 +45,7 @@ public class Banco {
 
         ListIterator<String> i = data.listIterator();
         restauraBanco(data, i);
+        if (nomeBanco.equals("")) nomeBanco = "pooBank";
     }
 
     public boolean salvar(Path filePath)
