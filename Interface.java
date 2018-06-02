@@ -164,13 +164,7 @@ public class Interface {
         } catch(NumberFormatException e) {
             numConta = 0; // usuario digitou qualquer coisa que nao e' int
         }
-        System.out.print("\t>>> Valor: ");
-        double valor;
-        try {
-            valor = Double.parseDouble(scan.nextLine());
-        } catch(NumberFormatException e) {
-            valor = 0; // usuario digitou qualquer coisa que nao e' double
-        }
+        double valor = promptDouble("Valor");
         System.out.print("\t>>> Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]: ");
         String confirmacao = scan.nextLine();
         if (confirmacao.equals("s")) {
@@ -194,13 +188,7 @@ public class Interface {
         } catch(NumberFormatException e) {
             numConta = 0; // usuario digitou qualquer coisa que nao e' int
         }
-        System.out.print("\t>>> Valor: ");
-        double valor;
-        try {
-            valor = Double.parseDouble(scan.nextLine());
-        } catch(NumberFormatException e) {
-            valor = 0; // usuario digitou qualquer coisa que nao e' double
-        }
+        double valor = promptDouble("Valor");
         System.out.print("\t>>> Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]: ");
         String confirmacao = scan.nextLine();
         if (confirmacao.equals("s")) {
@@ -233,13 +221,7 @@ public class Interface {
             numContaDestino = 0; // usuario digitou qualquer coisa que nao e' int
         }
 
- 		System.out.print("\t>>> Valor: ");
-        double valor;
-        try {
-            valor = Double.parseDouble(scan.nextLine());
-        } catch(NumberFormatException e) {
-            valor = 0; // usuario digitou qualquer coisa que nao e' double
-        }
+        double valor = promptDouble("Valor");
          System.out.print("\t>>> Confirmar transferencia de R$" + valor + " da conta " + numContaOrigem +
          	" para a conta " + numContaDestino +" ? [s/n]: ");
 
@@ -361,8 +343,19 @@ public class Interface {
         return input;
     }
 
-    private static double promptDouble() {
-        return 0;
+    private static double promptDouble(String descricao) {
+        System.out.print("\t>>> " + descricao + ": ");
+        double input;
+        try {
+            input = Double.parseDouble(scan.nextLine());
+        } catch(NumberFormatException e) {
+            input = promptDouble(descricao);
+        }
+        if (input < 0) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptDouble(descricao);
+        }
+        return input;
     }
 
     private static GregorianCalendar promptCalendar(String descricao) {
