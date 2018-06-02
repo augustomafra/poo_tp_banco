@@ -268,6 +268,8 @@ public class Banco {
     public ArrayList<banco.Movimentacao> extrato(int numConta, GregorianCalendar dataInicial, GregorianCalendar dataFinal){
         banco.Conta conta = getConta(numConta);
         if (conta == null) return null;
+        dataFinal.set(GregorianCalendar.HOUR_OF_DAY, dataFinal.getActualMaximum(GregorianCalendar.HOUR_OF_DAY));
+        dataFinal.set(GregorianCalendar.MINUTE, dataFinal.getActualMaximum(GregorianCalendar.MINUTE));
         return conta.getExtrato(dataInicial, dataFinal);
     }
 
