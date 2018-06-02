@@ -74,8 +74,9 @@ public class Conta {
     }
 
     public Cliente getCliente(){
-        return cliente;
-    } 
+        Cliente copia = new Cliente(cliente);
+        return copia;
+    }
 
     public int getNumConta(){
         return numConta;
