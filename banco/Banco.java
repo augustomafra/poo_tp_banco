@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.GregorianCalendar;
 
 public class Banco {
     public Banco(String nome) {
@@ -203,7 +204,6 @@ public class Banco {
 		banco.Conta conta = new banco.Conta(numConta, saldo, movimentacoes, c);
 		contas.add(conta);
 	}
-   
 	public int removeCliente(String cpf){
 		int flag = 0;
         int contador=0;
@@ -223,12 +223,12 @@ public class Banco {
             if(co.getCliente().getCpf_cnpj().equals(cpf)){;
             return -2;
             }
-        
+
         }
         clientes.remove(idCliente);
         return 0;
 	}
-	
+
     public boolean removeConta(int numConta){
         int contador=0;
         for(banco.Conta c : contas){
@@ -251,6 +251,24 @@ public class Banco {
         banco.Conta conta = getConta(numConta);
         if (conta == null) return false;
         return conta.debitar(valor, "Saque");
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato();
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta, GregorianCalendar dataInicial){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato(dataInicial);
+    }
+
+    public ArrayList<banco.Movimentacao> extrato(int numConta, GregorianCalendar dataInicial, GregorianCalendar dataFinal){
+        banco.Conta conta = getConta(numConta);
+        if (conta == null) return null;
+        return conta.getExtrato(dataInicial, dataFinal);
     }
 
     public void tarifa(){

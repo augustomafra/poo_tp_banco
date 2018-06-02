@@ -13,7 +13,7 @@ package banco;
 import java.util.List;
 import java.util.GregorianCalendar;
 
-class Movimentacao {
+public class Movimentacao {
     private GregorianCalendar dataMov;
     private String descricao;
     private char debitoCredito;

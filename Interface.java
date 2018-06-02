@@ -11,6 +11,7 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import banco.Banco;
 import banco.Cliente;
@@ -231,7 +232,7 @@ public class Interface {
         } catch(NumberFormatException e) {
             numContaDestino = 0; // usuario digitou qualquer coisa que nao e' int
         }
-        
+
  		System.out.print("\t>>> Valor: ");
         double valor;
         try {
@@ -239,7 +240,7 @@ public class Interface {
         } catch(NumberFormatException e) {
             valor = 0; // usuario digitou qualquer coisa que nao e' double
         }
-         System.out.print("\t>>> Confirmar transferencia de R$" + valor + " da conta " + numContaOrigem + 
+         System.out.print("\t>>> Confirmar transferencia de R$" + valor + " da conta " + numContaOrigem +
          	" para a conta " + numContaDestino +" ? [s/n]: ");
 
          String confirmacao = scan.nextLine();
@@ -252,7 +253,7 @@ public class Interface {
 	            } else {
 	                System.out.println("ERRO: Nenhuma conta com numero " + numContaDestino + " encontrada");
 	                banco.deposito(numContaOrigem, valor); //deposita o valor novamente em caso de erro
-	            }			    
+	            }
             } else {
                 System.out.println("ERRO: Saldo da conta insuficiente para saque");
             }
@@ -294,8 +295,23 @@ public class Interface {
     }
 
     private static void extrato() {
-        System.out.println("Obtendo extrato");
-        // TODO preencher funcao
+        System.out.println("Insira informacoes para o extrato:");
+        int numConta = promptInt("Numero da conta");
+        GregorianCalendar dataInicial = promptCalendar("Data inicial");
+        GregorianCalendar dataFinal = promptCalendar("Data final");
+        ArrayList<banco.Movimentacao> extrato = new ArrayList<banco.Movimentacao>();
+        if (dataInicial == null && dataFinal == null) {
+            extrato = banco.extrato(numConta);
+        } else if (dataFinal == null) {
+            extrato = banco.extrato(numConta, dataInicial);
+        } else {
+            extrato = banco.extrato(numConta, dataInicial, dataFinal);
+        }
+        if (extrato == null) {
+            System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
+        } else {
+            System.out.println(extrato);
+        }
     }
 
     private static void listarClientes() {
@@ -330,6 +346,53 @@ public class Interface {
         banco = new Banco(databaseFile);
     }
 /************************* Criar Comandos aqui dentro *************************/
+
+    private static String promptString() {
+        return new String();
+    }
+
+    private static int promptInt(String descricao) {
+        System.out.print("\t>>> " + descricao + ": ");
+        int input;
+        try {
+            input = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptInt(descricao);
+        }
+        return input;
+    }
+
+    private static double promptDouble() {
+        return 0;
+    }
+
+    private static GregorianCalendar promptCalendar(String descricao) {
+        GregorianCalendar input = new GregorianCalendar();
+        System.out.print("\t>>> " + descricao + " (dd/mm/aaaa ou default): ");
+        String inputString = scan.nextLine();
+        if (inputString.equals("default")) return null;
+        String[] calendarInfo = scan.nextLine().split("/");
+        int dia = 0, mes = 0, ano = 0;
+        try {
+            dia = Integer.parseInt(calendarInfo[0]);
+            mes = Integer.parseInt(calendarInfo[1]);
+            ano = Integer.parseInt(calendarInfo[2]);
+        } catch(NumberFormatException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptCalendar(descricao);
+        } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptCalendar(descricao);
+        }
+        input = new GregorianCalendar(ano, mes, dia);
+        if (dia > input.getActualMaximum(GregorianCalendar.DAY_OF_MONTH) ||
+            mes > input.getActualMaximum(GregorianCalendar.MONTH)) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptCalendar(descricao);
+        }
+        return input;
+    }
 
     private static void iniciarLinhaDeComando() {
         scan = new Scanner(System.in);
