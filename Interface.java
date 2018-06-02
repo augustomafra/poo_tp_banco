@@ -245,20 +245,18 @@ public class Interface {
 
          String confirmacao = scan.nextLine();
          if (confirmacao.equals("s")) {
-            boolean statusOrigem = banco.saque(numContaOrigem, valor);
-            if (statusOrigem) {
-	            boolean statusDestino = banco.deposito(numContaDestino, valor);
-	            if (statusDestino) {
-	                System.out.println("transferencia realizada com sucesso");
-	            } else {
-	                System.out.println("ERRO: Nenhuma conta com numero " + numContaDestino + " encontrada");
-	                banco.deposito(numContaOrigem, valor); //deposita o valor novamente em caso de erro
-	            }
+            int status = banco.transferencia(numContaOrigem, numContaDestino , valor);
+            if (status==-1) {
+                System.out.println("Numero de conta origem é invalido");    
+            } else if(status==-2){
+                System.out.println("Numero de conta destino é invalido");    
+            } else if(status==-3){
+                System.out.println("Saldo insuficiente");
             } else {
-                System.out.println("ERRO: Saldo da conta insuficiente para saque");
+                System.out.println("Transferencia realizada com sucesso");
             }
         } else {
-            System.out.println("Saque cancelado pelo usuario");
+            System.out.println("Transferencia cancelada pelo usuario");
         }
 
         // TODO preencher funcao
