@@ -293,11 +293,11 @@ public class Banco {
             banco.Conta contaDestino = getConta(numContaDestino);
             if (contaDestino== null) return -2;
 
-            String st = "Transferencia para conta " + numContaOrigem;
+            String st = "Transferencia para conta " + numContaDestino;
             if(contaOrigem.debitar(valor, st)==false){
                 return -3;
             }
-            String st2 = "Transferencia da conta " + numContaDestino;
+            String st2 = "Transferencia da conta " + numContaOrigem;
             contaDestino.creditar(valor, st2);
             return 0;
 
