@@ -286,5 +286,24 @@ public class Banco {
         }
         return -1;   
     }
+
+    public int transferencia(int numContaOrigem, int numContaDestino, double valor){
+            banco.Conta contaOrigem = getConta(numContaOrigem);
+            if (contaOrigem == null) return -1;
+            banco.Conta contaDestino = getConta(numContaDestino);
+            if (contaDestino== null) return -2;
+
+            String st = "Transferencia para conta " + numContaOrigem;
+            if(contaOrigem.debitar(valor, st)==false){
+                return -3;
+            }
+            String st2 = "Transferencia da conta " + numContaDestino;
+            contaDestino.creditar(valor, st2);
+            return 0;
+
+
+
+
+    }
 }
 
