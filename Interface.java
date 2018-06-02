@@ -222,10 +222,10 @@ public class Interface {
     private static void extrato() {
         System.out.println("Insira informacoes para o extrato:");
         int numConta = promptInt("Numero da conta");
-        GregorianCalendar dataInicial = promptCalendar("Data inicial");
-        GregorianCalendar dataFinal = promptCalendar("Data final");
+        GregorianCalendar dataInicial = promptCalendar("Data inicial (dd/mm/aaaa ou default = inicio do mes atual)");
+        GregorianCalendar dataFinal = promptCalendar("Data final (dd/mm/aaaa ou default = hoje)");
         ArrayList<banco.Movimentacao> extrato = new ArrayList<banco.Movimentacao>();
-        if (dataInicial == null && dataFinal == null) {
+        if (dataInicial == null) {
             extrato = banco.extrato(numConta);
         } else if (dataFinal == null) {
             extrato = banco.extrato(numConta, dataInicial);
@@ -307,9 +307,9 @@ public class Interface {
 
     private static GregorianCalendar promptCalendar(String descricao) {
         GregorianCalendar input = new GregorianCalendar();
-        System.out.print("\t>>> " + descricao + " (dd/mm/aaaa ou default): ");
+        System.out.print("\t>>> " + descricao + ": ");
         String inputString = scan.nextLine();
-        if (inputString.equals("default")) return null;
+        if (inputString.equals("default") || inputString.equals("")) return null;
         String[] calendarInfo = inputString.split("/");
         int dia = 0, mes = 0, ano = 0;
         try {
